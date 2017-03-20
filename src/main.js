@@ -6,9 +6,9 @@ import router from './router'
 import VueResource from 'vue-resource'
 import store from './store'
 import * as filters from './filter'
-import FastClick from 'fastclick'
+// import FastClick from 'fastclick'
 
-FastClick.attach(document.body)
+// FastClick.attach(document.body)
 Vue.use(VueResource)
 Vue.config.productionTip = false
 
