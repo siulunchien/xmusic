@@ -1,6 +1,15 @@
 @import "~sass/fn";
 
 .songs{
+  &__loading{
+    padding-top: p2r(100);
+    &>img{
+      display: block;
+      width: p2r(120);
+      height: p2r(120);
+      margin: 0 auto;
+    }
+  }
   &__header{
     position: relative;
     padding-top: 100%;
