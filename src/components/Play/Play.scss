@@ -1,0 +1,77 @@
+@import "~sass/fn";
+
+.play{
+  display: flex;
+  @include borderTopBefore($position: fixed);
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: $footerHeight;
+  background: #ffffff;
+  z-index: 5;
+  &__info{
+    flex: 1;
+    height: 100%;
+    padding: p2r(20) p2r(20) p2r(10);
+    @include txtOver;
+    &>h4, &>p{
+      @include txtOver;
+    }
+    &>p{
+      color: grey;
+    }
+  }
+  &__control, &__play-list{
+    flex: 0 0 p2r(150);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: p2r(150);
+    height: 100%;
+  }
+  &__control{
+    &__btn{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border: solid 1px $mainColor;
+      border-radius: 100%;
+      &.play__control__btn--playing{
+        &:before, &:after{
+          content: "";
+          width: 4px;
+          height: 15px;
+          background: $mainColor;
+        }
+        &:before{
+          margin-right: 4px;
+        }
+      }
+      &.play__control__btn--pause{
+        &:before{
+          content: "";
+          width: 0;
+          height: 0;
+          border-width: 8px 0 8px 10px;
+          border-style: solid;
+          border-color: transparent transparent transparent $mainColor;
+          margin-left: 3px;
+        }
+      }
+    }
+  }
+  &__play-list{
+    flex-direction: column;
+    &__line{
+      width: p2r(50);
+      height: p2r(2);
+      margin-bottom: p2r(16);
+      border-top: solid 1px $mainColor;
+      &:last-child{
+        margin-bottom: 0;
+      }
+    }
+  }
+}

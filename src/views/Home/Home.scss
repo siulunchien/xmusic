@@ -1,0 +1,22 @@
+@import "~sass/fn";
+
+.home{
+  &__header{
+    height: p2r(88);
+    line-height: p2r(88);
+    padding-left: p2r(30);
+    color: #ffffff;
+    background: $mainColor;
+  }
+  &__section{
+    &__list-container{
+      padding: p2r(20) p2r(30);
+      &__item{
+        margin-bottom: p2r(20);
+        &:last-child{
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}

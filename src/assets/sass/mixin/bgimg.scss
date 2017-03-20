@@ -1,0 +1,6 @@
+// 倍数图
+@mixin bgimg($url, $type: ".png") {
+  background-image: url($url + $type);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}

@@ -1,0 +1,105 @@
+@import "~sass/fn";
+
+.songs{
+  &__header{
+    position: relative;
+    padding-top: 100%;
+    overflow: hidden;
+    &__pic{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    &__title{
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      padding: 0 p2r(30) p2r(60);
+      color: #ffffff;
+      z-index: 2;
+      @include txtOver;
+      &>h1{
+        font-size: 24px;
+        @include txtOver;
+      }
+    }
+    &__bg{
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      padding-top: 60%;
+      background-image: -webkit-linear-gradient(top, transparent, #000 80%);
+    }
+  }
+  &__songs-list{
+    &__container{
+      @include borderTopBefore($color: rgba(142, 142, 142, .3));
+      background: #000;
+      color: #ffffff;
+      &__item{
+        display: flex;
+        @include borderBottomAfter($color: rgba(142, 142, 142, .3));
+        &__num{
+          flex: 0 0 p2r(100);
+          width: p2r(100);
+          margin-top: p2r(30);
+          text-align: center;
+          @include txtOver;
+        }
+        &__info{
+          flex: 1;
+          padding: p2r(20) p2r(60) p2r(20) 0;
+          @include txtOver;
+          &>h1, &>p{
+            @include txtOver;
+          }
+          &>p{
+            color: grey;
+          }
+        }
+      }
+    }
+  }
+  &__choose{
+    &__mask{
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, .6);
+      z-index: 10;
+    }
+    &__main{
+      @include borderTopBefore($position: fixed, $color: $mainColor);
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      padding: p2r(20) p2r(20) p2r(50);
+      height: p2r(450);
+      color: #ffffff;
+      background: rgba(0, 0, 0, 1);
+      z-index: 10;
+      &__header{
+        height: p2r(100);
+        line-height: p2r(100);
+        &>h3{
+          @include txtOver;
+        }
+      }
+      &__btn-group{
+        &>a{
+          display: block;
+          height: p2r(100);
+          line-height: p2r(100);
+          color: #ffffff;
+          text-align: center;
+        }
+      }
+    }
+  }
+}

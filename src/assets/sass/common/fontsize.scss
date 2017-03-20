@@ -1,0 +1,11 @@
+@for $i from 4 through 10 {
+  .f-#{$i * 2} {
+    font-size: 2px * $i * 1;
+  }
+  [data-dpr="2"] .f-#{$i * 2} {
+    font-size: 2px * $i * 2;
+  }
+  [data-dpr="3"] .f-#{$i * 2} {
+    font-size: 2px * $i * 3;
+  }
+}

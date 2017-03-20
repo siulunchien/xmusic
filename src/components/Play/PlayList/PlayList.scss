@@ -1,0 +1,76 @@
+@import "~sass/fn";
+
+.play-list__mask{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .7);
+    z-index: 90;
+  }
+.play-list-container{
+  @include borderTopBefore($position: fixed, $color: $mainColor);
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: p2r(800);
+  background: #ffffff;
+  z-index: 100;
+  &__header{
+    @include borderBottomAfter($position: absolute);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: p2r(120);
+    line-height: p2r(120);
+    text-align: center;
+    &__btn{
+      display: block;
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: p2r(120);
+    }
+  }
+  &__content{
+    position: absolute;
+    top: p2r(120);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    &__main{
+      padding: 0 p2r(20);
+      &__item{
+        display: flex;
+        align-items: center;
+        height: p2r(120);
+        @include borderBottomAfter;
+        &>h4{
+          flex: 1;
+          @include txtOver;
+          &>span{
+            color: grey;
+          }
+        }
+        &__btn{
+          flex: 0 0 p2r(80);
+          width: p2r(80);
+          height: p2r(120);
+          text-align: center;
+          line-height: p2r(120);
+          color: grey;
+        }
+        &.play-list-container__content__main__item--playing{
+          color: $mainColor;
+          & span{
+            color: $mainColor;
+          }
+        }
+      }
+    }
+  }
+}

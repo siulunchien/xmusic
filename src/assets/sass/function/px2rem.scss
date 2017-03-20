@@ -1,0 +1,5 @@
+$designSize: 75 !default;
+
+@function p2r($px) {
+  @return $px / $designSize * 1rem;
+}

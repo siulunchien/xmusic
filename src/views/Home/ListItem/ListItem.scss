@@ -1,0 +1,51 @@
+@import "~sass/fn";
+
+.list-item{
+  display: flex;
+  background: #ffffff;
+  overflow: hidden;
+  &__pic{
+    flex: 0 0 p2r(215);
+    width: p2r(215);
+    height: p2r(215);
+    &>img{
+      width: 100%;
+      height: 100%;
+    }
+  }
+  &__info{
+    display: flex;
+    align-items: center;
+    flex: 1;
+    @include txtOver;
+    &__container{
+      position: relative;
+      width: 100%;
+      padding: 0 p2r(20) 0 p2r(30);
+      &__title{
+        margin-bottom: p2r(10);
+        @include txtOver;
+      }
+      &>p{
+        color: rgba(0, 0, 0, .5);
+        @include txtOver;
+        &>span{
+          color: #000000;
+          margin-left: p2r(20);
+        }
+      }
+      &__arrow{
+        display: block;
+        position: absolute;
+        top: 50%;
+        right: p2r(12);
+        width: p2r(12);
+        height: p2r(12);
+        margin-top: p2r(-6);
+        border-top: solid 1px #b2b2b2;
+        border-right: solid 1px #b2b2b2;
+        transform: rotate(45deg);
+      }
+    }
+  }
+}

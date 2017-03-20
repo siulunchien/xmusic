@@ -1,0 +1,128 @@
+$defaultColor: #d7d7d7 !default;
+
+/* X 方向缩放 */
+@mixin scaleX($dpr) {
+  transform: scaleX(1 / $dpr);
+}
+
+/* Y 方向缩放 */
+@mixin scaleY($dpr) {
+  transform: scaleY(1 / $dpr);
+}
+
+
+/* 上边框 */
+@mixin borderTop($color: $defaultColor, $dpr: 2) {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 1px;
+  border-top: 1px solid $color;
+  @include scaleY($dpr);
+}
+
+/* 上边框 - before */
+@mixin borderTopBefore($position: relative, $color: $defaultColor, $dpr: 2) {
+  position: $position;
+  &:before{
+    @include borderTop($color: $color, $dpr: $dpr)
+  }
+}
+
+/* 上边框 - after */
+@mixin borderTopAfter($position: relative, $color: $defaultColor, $dpr: 2) {
+  position: $position;
+  &:after{
+    @include borderTop($color: $color, $dpr: $dpr)
+  }
+}
+
+
+/* 下边框 */
+@mixin borderBottom($color: $defaultColor, $dpr: 2) {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  border-bottom: 1px solid $color;
+  @include scaleY($dpr);
+}
+
+/* 下边框 - before */
+@mixin borderBottomBefore($position: relative, $color: $defaultColor, $dpr: 2) {
+  position: $position;
+  &:before{
+    @include borderBottom($color: $color, $dpr: $dpr)
+  }
+}
+
+/* 下边框 - after */
+@mixin borderBottomAfter($position: relative, $color: $defaultColor, $dpr: 2) {
+  position: $position;
+  &:after{
+    @include borderBottom($color: $color, $dpr: $dpr)
+  }
+}
+
+
+/* 左边框 */
+@mixin borderLeft($color: $defaultColor, $dpr: 2) {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1px;
+  height: 100%;
+  border-left: 1px solid $color;
+  @include scaleX($dpr);
+}
+
+/* 左边框 - before */
+@mixin borderLeftBefore($position: relative, $color: $defaultColor, $dpr: 2) {
+  position: $position;
+  &:before{
+    @include borderLeft($color: $color, $dpr: $dpr)
+  }
+}
+
+/* 左边框 - after */
+@mixin borderLeftAfter($position: relative, $color: $defaultColor, $dpr: 2) {
+  position: $position;
+  &:after{
+    @include borderLeft($color: $color, $dpr: $dpr)
+  }
+}
+
+
+
+/* 右边框 */
+@mixin borderRight($color: $defaultColor, $dpr: 2) {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 1px;
+  height: 100%;
+  border-right: 1px solid $color;
+  @include scaleX($dpr);
+}
+
+/* 右边框 - before */
+@mixin borderRightBefore($position: relative, $color: $defaultColor, $dpr: 2) {
+  position: $position;
+  &:before{
+    @include borderRight($color: $color, $dpr: $dpr)
+  }
+}
+
+/* 右边框 - after */
+@mixin borderRightAfter($position: relative, $color: $defaultColor, $dpr: 2) {
+  position: $position;
+  &:after{
+    @include borderRight($color: $color, $dpr: $dpr)
+  }
+}

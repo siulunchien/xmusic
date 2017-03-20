@@ -1,0 +1,68 @@
+/*变量*/
+@import "../fn";
+
+/*重置样式*/
+@import "./reset";
+
+/*字体大小样式*/
+@import "./fontsize";
+
+*{
+  box-sizing: border-box;
+}
+
+html, body{
+  height: 100%;
+  background: $mainColor;
+}
+
+body{
+  font: 12px/1.5 "hiragino sans gb",arial;
+  max-width: 10rem;
+  margin: 0 auto;
+}
+
+input[type="checkbox"], input[type="radio"], select, textarea{
+  -webkit-appearance: none;
+}
+
+select{
+  background: transparent;
+  border: none;
+}
+
+#app{
+  min-height: 100%;
+  background: $bgColor;
+  position: relative;
+  // overflow: hidden;
+  & .fade-enter-active, .fade-leave-active {
+    will-change: opacity;
+    transition: opacity .3s;
+  }
+  & .fade-enter, .fade-leave-active {
+    opacity: 0
+  }
+  & .slide-fade-enter-active {
+    transition: all .3s ease;
+  }
+  & .slide-fade-leave-active {
+    transition: all .3s ease;
+  }
+  & .slide-fade-enter, .slide-fade-leave-active {
+    transform: translateY(100%);
+  }
+}
+
+.rippleBtn{
+    position: absolute;
+    background: rgba(0,0,0,0.3);
+    border-radius: 100%;
+    transform: scale(0);
+    transform-origin: center center;
+    transition: all .75s cubic-bezier(0.250, 0.460, 0.450, 0.940);
+}
+.rippleBtnBig{
+    transform: scale(1.5);
+    opacity: 0;
+}
