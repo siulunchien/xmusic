@@ -30,7 +30,7 @@
 
   import PlayList from './PlayList/PlayList';
   import Player from './Player/Player';
-  import { TOPLAY, TOPAUSE } from '@/store/types';
+  import { TOPLAY, TOPAUSE, NEXT } from '@/store/types';
 
   export default {
     name: 'Play',
@@ -78,6 +78,8 @@
       // 控制播放
       play (audio) {
         clearInterval(this.timer);
+        audio.removeEventListener('ended', this.next, false);
+        audio.addEventListener('ended', this.next, false);
         if (this.isPlaying) {
           audio.play();
           this.timer = setInterval(() => {
@@ -86,6 +88,11 @@
         } else {
           audio.pause();
         }
+      },
+      // 下一首
+      next () {
+        console.log(111);
+        this.$store.commit(NEXT);
       }
     },
     computed: {

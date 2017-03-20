@@ -83,15 +83,23 @@ export default new Vuex.Store({
     [types.IMMEDIATELY] (state, item) {
       state.isPlaying = false;
       let index = state.playList.indexOf(item);
+      let flag = false;
       if (index != -1) {
         state.playing = state.playList[index];
       } else {
         state.playList.push(item);
         state.playing = state.playList[state.playList.length - 1];
+        if (state.playList.length == 1) flag = true;
       }
-      setTimeout(() => {
+
+      if (flag) {
         state.isPlaying = true;
-      }, 500)
+      } else {
+        setTimeout(() => {
+          state.isPlaying = true;
+        }, 500)
+      }
+      
     }
   }
 })
