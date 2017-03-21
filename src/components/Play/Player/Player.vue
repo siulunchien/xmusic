@@ -4,7 +4,7 @@
 
 <template>
   <div class="player">
-    <div class="player__bg"></div>
+    <div class="player__bg" :style="bg"></div>
     <div class="player__mask"></div>
     <section class="player__content">
       <header v-if="playingInfo" class="player__content__header">
@@ -46,6 +46,9 @@
       progress: {
         type: String,
         default: '0'
+      },
+      albummPic: {
+        type: String
       }
     },
     methods: {
@@ -85,6 +88,11 @@
       },
       isPlaying () {
         return this.$store.state.isPlaying;
+      },
+      bg () {
+        return {
+          backgroundImage: this.albummPic ? `url(${this.albummPic})` : ''
+        }
       }
     }
   }

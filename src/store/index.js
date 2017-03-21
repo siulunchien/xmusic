@@ -25,23 +25,25 @@ export default new Vuex.Store({
     },
     // 从播放列表中移除
     [types.REMOVEPLAYLIST] (state, index) {
-      if (state.playing == state.playList[index]) {
-        state.isPlaying = false;
-        state.playing = state.playList[index + 1]
-                        ? state.playList[index + 1]
-                        : state.playList[index - 1]
-                        ? state.playList[index - 1]
-                        : null
-      }
-      state.playList.splice(index, 1);
-      if (state.playList <= 0) {
-        state.playing = null;
-      }
-      if (state.playing) {
-        setTimeout(() => {
+      new Promise((resolve, reject) => {
+        if (state.playing == state.playList[index]) {
+          state.isPlaying = false;
+          state.playing = state.playList[index + 1]
+                          ? state.playList[index + 1]
+                          : state.playList[index - 1]
+                          ? state.playList[index - 1]
+                          : null
+        }
+        state.playList.splice(index, 1);
+        if (state.playList <= 0) {
+          state.playing = null;
+        }
+        resolve();
+      }).then(() => {
+        if (state.playing) {
           state.isPlaying = true;
-        }, 500)
-      }
+        }
+      })
     },
     // 清空播发列表
     [types.CLEARPLAYLIST] (state) {
@@ -61,44 +63,43 @@ export default new Vuex.Store({
     [types.PREV] (state) {
       let index = state.playList.indexOf(state.playing);
       if (index > 0) {
-        state.isPlaying = false;
-        state.playing = state.playList[index - 1];
-        setTimeout(() => {
+        new Promise((resolve, reject) => {
+          state.isPlaying = false;
+          state.playing = state.playList[index - 1];
+          resolve();
+        }).then(() => {
           state.isPlaying = true;
-        }, 500)
+        })
       }
     },
     // 下一首
     [types.NEXT] (state) {
       let index = state.playList.indexOf(state.playing);
       if (index < state.playList.length - 1) {
-        state.isPlaying = false;
-        state.playing = state.playList[index + 1];
-        setTimeout(() => {
+        new Promise((resolve, reject) => {
+          state.isPlaying = false;
+          state.playing = state.playList[index + 1];
+          resolve();
+        }).then(() => {
           state.isPlaying = true;
-        }, 500)
+        })
       }
     },
     // 马上播放
     [types.IMMEDIATELY] (state, item) {
       state.isPlaying = false;
       let index = state.playList.indexOf(item);
-      let flag = false;
-      if (index != -1) {
-        state.playing = state.playList[index];
-      } else {
-        state.playList.push(item);
-        state.playing = state.playList[state.playList.length - 1];
-        if (state.playList.length == 1) flag = true;
-      }
-
-      if (flag) {
+      new Promise((resolve, reject) => {
+        if (index != -1) {
+          state.playing = state.playList[index];
+        } else {
+          state.playList.push(item);
+          state.playing = state.playList[state.playList.length - 1];
+        }
+        resolve();
+      }).then(() => {
         state.isPlaying = true;
-      } else {
-        setTimeout(() => {
-          state.isPlaying = true;
-        }, 500)
-      }
+      })
       
     }
   }
