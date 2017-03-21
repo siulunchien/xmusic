@@ -21,7 +21,7 @@
     <play-list :isShow="isShowPlayList" v-on:closePlayList="closePlayList"></play-list>
     <!-- 播放器 -->
     <transition name="slide-fade">
-      <Player v-show="isShowPlayer" :progress="timeProgress" v-on:setProgress="setProgress" v-on:closePlayer="closePlayer" v-on:showPlayList="showPlayList"></Player>
+      <Player v-show="isShowPlayer" :albummPic="albummPic" :progress="timeProgress" v-on:setProgress="setProgress" v-on:closePlayer="closePlayer" v-on:showPlayList="showPlayList"></Player>
     </transition>
   </footer>
 </template>
@@ -91,7 +91,6 @@
       },
       // 下一首
       next () {
-        console.log(111);
         this.$store.commit(NEXT);
       }
     },
@@ -106,6 +105,11 @@
       songUrl () {
         let songId = this.playingInfo ? this.playingInfo.data.songid : '';
         return songId ? `http://ws.stream.qqmusic.qq.com/${songId}.m4a?fromtag=46` : '';
+      },
+      // 获取歌曲封面照
+      albummPic () {
+        let albummPic = this.playingInfo ? this.playingInfo.data.albummid : '';
+        return albummPic ? `https://y.gtimg.cn/music/photo_new/T002R150x150M000${albummPic}.jpg?max_age=2592000` : '';
       },
       isPlaying () {
         return this.$store.state.isPlaying;

@@ -12,7 +12,8 @@
     position: absolute;
   }
   &__bg{
-    background: url('./images/xbg.jpg') no-repeat;
+    background-image: url('./images/xbg.jpg');
+    background-repeat: no-repeat;
     background-size: cover;
     background-position: top center;
     filter: blur(10px);
