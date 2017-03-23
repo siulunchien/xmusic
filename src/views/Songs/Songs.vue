@@ -3,7 +3,7 @@
 </style>
 
 <template>
-  <main class="songs">
+  <Scroll class="songs">
     
     <div v-if="isLoading" class="songs__loading"><img src="./images/ripple.svg" alt=""></div>
     <transition name="fade">
@@ -46,11 +46,12 @@
         </div>
       </div>
     </transition>
-  </main>
+  </Scroll>
 </template>
 
 <script>
 
+  import { Scroll } from '@/components';
   import api from '@/api';
   import { ADDPLAYLIST, IMMEDIATELY } from '@/store/types';
 
@@ -114,6 +115,9 @@
         this.$store.commit(IMMEDIATELY, this.chooseItem);
         this.closeChooseSong();
       }
+    },
+    components: {
+      Scroll
     }
   }
 </script>

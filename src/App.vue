@@ -1,15 +1,15 @@
 <style lang="scss">
   @import "~sass/common/index";
   .hasPlayList{
-    padding-bottom: $footerHeight;
+    bottom: $footerHeight !important;
   }
 </style>
 
 <template>
-  <div id="app" :class="{'hasPlayList': playListLen}">
+  <div id="app">
     <transition name="fade" mode="out-in">
       <keep-alive exclude="Songs">
-        <router-view></router-view>
+        <router-view :class="{'hasPlayList': playListLen}"></router-view>
       </keep-alive>
     </transition>
     <transition name="slide-fade">
