@@ -2,9 +2,9 @@
 
 .play{
   display: flex;
-  @include borderTopBefore($position: fixed);
+  @include borderTopBefore($position: absolute);
   left: 0;
-  bottom: 0;
+  bottom: -$footerHeight;
   width: 100%;
   height: $footerHeight;
   background: #ffffff;

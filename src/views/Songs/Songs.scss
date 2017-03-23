@@ -73,42 +73,4 @@
       }
     }
   }
-  &__choose{
-    &__mask{
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, .6);
-      z-index: 10;
-    }
-    &__main{
-      @include borderTopBefore($position: fixed, $color: $mainColor);
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      padding: p2r(20) p2r(20) p2r(50);
-      height: p2r(450);
-      color: #ffffff;
-      background: rgba(0, 0, 0, 1);
-      z-index: 10;
-      &__header{
-        height: p2r(100);
-        line-height: p2r(100);
-        &>h3{
-          @include txtOver;
-        }
-      }
-      &__btn-group{
-        &>a{
-          display: block;
-          height: p2r(100);
-          line-height: p2r(100);
-          color: #ffffff;
-          text-align: center;
-        }
-      }
-    }
-  }
 }

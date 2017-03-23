@@ -27,23 +27,6 @@
             </li>
           </ul>
         </section>
-        <div class="songs__choose">
-          <transition name="fade">
-            <div v-show="isChoose" class="songs__choose__mask" @click="closeChooseSong"></div>
-          </transition>
-          <transition name="slide-fade">
-            <div v-show="isChoose" class="songs__choose__main">
-              <header class="songs__choose__main__header">
-                <h3 v-if="chooseItem" class="f-14"><span>歌曲：</span> {{ chooseItem.data.songname }}</h3>
-              </header>
-              <div class="songs__choose__main__btn-group f-14">
-                <a href="javascript:;" class="songs__choose__main__btn-group__toPlay" @click="immediately">立即播放</a>
-                <a href="javascript:;" class="songs__choose__main__btn-group__addPlayList" @click="addToPlayList">加入播放列表</a>
-                <a href="javascript:;" class="songs__choose__main__btn-group__close" @click="closeChooseSong">关闭</a>
-              </div>
-            </div>
-          </transition>
-        </div>
       </div>
     </transition>
   </Scroll>
@@ -53,7 +36,7 @@
 
   import { Scroll } from '@/components';
   import api from '@/api';
-  import { ADDPLAYLIST, IMMEDIATELY } from '@/store/types';
+  import { CHOOSESONG } from '@/store/modules/Play/types';
 
   export default {
     name: 'Songs',
@@ -63,8 +46,6 @@
         topInfo: {},
         date: '',
         updateTime: '',
-        isChoose: false,
-        chooseItem: null,
         isLoading: true
       }
     },
@@ -98,22 +79,7 @@
       },
       // 选择歌曲
       chooseSong (item) {
-        this.isChoose = true;
-        this.chooseItem = item;
-      },
-      // 关闭选择歌曲
-      closeChooseSong () {
-        this.isChoose = false;
-      },
-      // 加入播放列表
-      addToPlayList () {
-        this.$store.commit(ADDPLAYLIST, this.chooseItem);
-        this.closeChooseSong();
-      },
-      // 马上播放
-      immediately () {
-        this.$store.commit(IMMEDIATELY, this.chooseItem);
-        this.closeChooseSong();
+        this.$store.commit(CHOOSESONG, item);
       }
     },
     components: {

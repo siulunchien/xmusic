@@ -13,3 +13,7 @@ export const PREV = 'prev'; // 上一首
 export const NEXT = 'next'; // 下一首
 
 export const IMMEDIATELY = 'immediately'; // 马上播放
+
+export const CHOOSESONG = 'chooseSong'; // 选中歌曲
+
+export const CLEARCHOOSESONG = 'clearChooseSong'; // 删除选中歌曲

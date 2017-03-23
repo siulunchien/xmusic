@@ -28,7 +28,7 @@
 
 <script>
   
-  import { CLEARPLAYLIST, REMOVEPLAYLIST, IMMEDIATELY } from '@/store/types';
+  import { CLEARPLAYLIST, REMOVEPLAYLIST, IMMEDIATELY } from '@/store/modules/Play/types';
 
   export default {
     name: 'PlayList',
@@ -50,23 +50,23 @@
       },
       // 从播放列表中移除歌曲
       removeSong (index) {
-        this.$store.commit(REMOVEPLAYLIST, index);
+        this.$store.dispatch('delFromPlayList', index);
         if (this.playList.length <= 0) {
           this.closePlayList();
         }
       },
       // 马上播放
       immediately (item) {
-        this.$store.commit(IMMEDIATELY, item);
+        this.$store.dispatch('immediately', item);
         this.closePlayList();
       }
     },
     computed: {
       playList () {
-        return this.$store.state.playList;
+        return this.$store.state.Play.playList;
       },
       playingId () {
-        return this.$store.state.playing ? this.$store.state.playing.data.songid : '';
+        return this.$store.state.Play.playing ? this.$store.state.Play.playing.data.songid : '';
       }
     }
   }

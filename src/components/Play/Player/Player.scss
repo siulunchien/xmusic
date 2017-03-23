@@ -1,5 +1,14 @@
 @import "~sass/fn";
 
+@keyframes picrotate{
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .player{
   position: fixed;
   top: 0;
@@ -71,6 +80,7 @@
           width: 70%;
           height: 1px;
           background: #828282;
+          margin: 0 p2r(10);
           &>i{
             display: block;
             position: absolute;
@@ -181,6 +191,7 @@
     }
     &__lyc{
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       padding: 0 p2r(20);
@@ -189,6 +200,16 @@
       left: 0;
       right: 0;
       bottom: p2r(500);
+      &__pic{
+        width: p2r(300);
+        height: p2r(300);
+        margin-bottom: p2r(50);
+        border-radius: 100%;
+        overflow: hidden;
+        &.player__content__lyc__pic--rotate{
+          animation: picrotate 8s linear infinite;
+        }
+      }
       &>p{
         @include txtOver;
       }
