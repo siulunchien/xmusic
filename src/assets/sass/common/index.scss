@@ -12,7 +12,6 @@
 }
 
 html, body{
-  height: 100%;
   background: $mainColor;
 }
 
@@ -32,10 +31,15 @@ select{
 }
 
 #app{
-  min-height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  max-width: 10rem;
+  margin: 0 auto;
+  overflow: hidden;
   background: $bgColor;
-  position: relative;
-  // overflow: hidden;
   & .fade-enter-active, .fade-leave-active {
     will-change: opacity;
     transition: opacity .3s;

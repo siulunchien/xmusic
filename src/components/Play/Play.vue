@@ -21,8 +21,9 @@
     <play-list :isShow="isShowPlayList" v-on:closePlayList="closePlayList"></play-list>
     <!-- 播放器 -->
     <transition name="slide-fade">
-      <Player v-show="isShowPlayer" :albummPic="albummPic" :progress="timeProgress" v-on:setProgress="setProgress" v-on:closePlayer="closePlayer" v-on:showPlayList="showPlayList"></Player>
+      <Player v-show="isShowPlayer" :albummPic="albummPic" :duration="duration" :currentTime="currentTime" :progress="timeProgress" v-on:setProgress="setProgress" v-on:closePlayer="closePlayer" v-on:showPlayList="showPlayList"></Player>
     </transition>
+    <Choose></Choose>
   </footer>
 </template>
 
@@ -30,7 +31,8 @@
 
   import PlayList from './PlayList/PlayList';
   import Player from './Player/Player';
-  import { TOPLAY, TOPAUSE, NEXT } from '@/store/types';
+  import Choose from './Choose/Choose';
+  import { TOPLAY, TOPAUSE } from '@/store/modules/Play/types';
 
   export default {
     name: 'Play',
@@ -41,11 +43,15 @@
         allTime: '',
         nowTime: '',
         timeProgress: '',
-        timer: null
+        timer: null,
+        duration: 0,
+        currentTime: 0
       }
     },
     mounted () {
-      
+      this.$nextTick(() => {
+        this.audio = document.querySelector('#play__audio');
+      })
     },
     methods: {
       // 显示播放列表
@@ -84,6 +90,8 @@
           audio.play();
           this.timer = setInterval(() => {
             this.timeProgress = (audio.currentTime / audio.duration) * 100 + '%';
+            this.currentTime = audio.currentTime;
+            this.duration = audio.duration;
           }, 1000)
         } else {
           audio.pause();
@@ -91,15 +99,15 @@
       },
       // 下一首
       next () {
-        this.$store.commit(NEXT);
+        this.$store.dispatch('nextSong');
       }
     },
     computed: {
       playingInfo () {
-        return this.$store.state.playing
-                ? this.$store.state.playing
-                : this.$store.state.playList.length > 0 
-                ? this.$store.state.playList[0]
+        return this.$store.state.Play.playing
+                ? this.$store.state.Play.playing
+                : this.$store.state.Play.playList.length > 0 
+                ? this.$store.state.Play.playList[0]
                 : null
       },
       songUrl () {
@@ -112,7 +120,7 @@
         return albummPic ? `https://y.gtimg.cn/music/photo_new/T002R150x150M000${albummPic}.jpg?max_age=2592000` : '';
       },
       isPlaying () {
-        return this.$store.state.isPlaying;
+        return this.$store.state.Play.isPlaying;
       }
     },
     watch: {
@@ -123,14 +131,14 @@
       },
       isPlaying () {
         this.$nextTick(() => {
-          let audio = document.querySelector('#play__audio');
-          this.play(audio);
+          this.play(this.audio);
         });
       }
     },
     components: {
       PlayList,
-      Player
+      Player,
+      Choose
     }
   }
 </script>

@@ -13,11 +13,14 @@
         <a href="javascript:;" class="player__content__header__btn" @click="closePlayer"></a>
       </header>
       <div class="player__content__lyc">
+        <img :src="albummPic" alt="" class="player__content__lyc__pic" :class="{'player__content__lyc__pic--rotate': isPlaying}">
         <p>暂不支持歌词显示</p>
       </div>
       <footer class="player__content__footer">
-        <div class="player__content__footer__progress">
+        <div class="player__content__footer__progress f-10">
+          <span>{{ currentTime | timeFormat }}</span>
           <div class="player__content__footer__progress__line"><i :style="{width: progress}"></i></div>
+          <span>{{ duration | timeFormat }}</span>
         </div>
         <div class="player__content__footer__control">
           <a href="javascript:;" class="player__content__footer__control__prev" @click="prev"></a>
@@ -38,7 +41,7 @@
 
 <script>
   
-  import { TOPLAY, TOPAUSE, PREV, NEXT } from '@/store/types';
+  import { TOPLAY, TOPAUSE, PREV, NEXT } from '@/store/modules/Play/types';
 
   export default {
     name: 'Player',
@@ -49,6 +52,14 @@
       },
       albummPic: {
         type: String
+      },
+      currentTime: {
+        type: Number,
+        default: 0
+      },
+      duration: {
+        type: Number,
+        default: 0
       }
     },
     methods: {
@@ -70,12 +81,12 @@
       },
       // 上一首
       prev () {
-        this.$store.commit(PREV);
+        this.$store.dispatch('prevSong');
         this.setProgress();
       },
       // 下一首
       next () {
-        this.$store.commit(NEXT);
+        this.$store.dispatch('nextSong');
         this.setProgress();
       },
       setProgress () {
@@ -84,10 +95,10 @@
     },
     computed: {
       playingInfo () {
-        return this.$store.state.playing;
+        return this.$store.state.Play.playing;
       },
       isPlaying () {
-        return this.$store.state.isPlaying;
+        return this.$store.state.Play.isPlaying;
       },
       bg () {
         return {

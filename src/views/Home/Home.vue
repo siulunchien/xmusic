@@ -3,19 +3,20 @@
 </style>
 
 <template>
-  <main class="home">
+  <Scroll class="home">
     <header class="home__header f-16">x - music</header>
     <section class="home__section">
       <ul class="home__section__list-container">
         <list-item v-for="(item, index) in toplist" :key="index" :listData="item" class="home__section__list-container__item"></list-item>
       </ul>
     </section>
-  </main>
+  </Scroll>
 </template>
 
 <script>
 
   import ListItem from './ListItem/ListItem'
+  import { Scroll } from '@/components'
   import api from '@/api'
 
   export default {
@@ -52,7 +53,8 @@
       }
     },
     components: {
-      ListItem
+      ListItem,
+      Scroll
     }
   }
 </script>
