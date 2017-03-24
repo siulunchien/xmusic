@@ -1,4 +1,5 @@
 import * as types from './types';
+import api from '@/api';
 
 /**
  * 播放下一首歌
@@ -7,9 +8,10 @@ import * as types from './types';
  */
 export const nextSong = ({ commit, state }) => {
   let index = (state.playList.indexOf(state.playing) + 1) % state.playList.length;
+  let nextItem = state.playList[index];
   new Promise((resolve, reject) => {
     commit(types.TOPAUSE);
-    state.playing = state.playList[index];
+    commit(types.SETPLAYINGSONG, nextItem);
     resolve();
   }).then(() => {
     commit(types.TOPLAY);
@@ -24,9 +26,10 @@ export const nextSong = ({ commit, state }) => {
  */
 export const prevSong = ({ commit, state }) => {
   let index = (state.playList.indexOf(state.playing) - 1 + state.playList.length) % state.playList.length;
+  let prevItem = state.playList[index];
   new Promise((resolve, reject) => {
     commit(types.TOPAUSE);
-    state.playing = state.playList[index];
+    commit(types.SETPLAYINGSONG, prevItem);
     resolve();
   }).then(() => {
     commit(types.TOPLAY);
@@ -41,15 +44,17 @@ export const prevSong = ({ commit, state }) => {
  * @param {Object} item              选中的歌曲
  */
 export const immediately = ({ commit, state }, item) => {
-  let index = state.playListIds.indexOf(item.data.songid);
+  let index = state.playListIds.indexOf(item.data.songid),
+      nowItem = null;
   new Promise((resolve, reject) => {
     commit(types.TOPAUSE);
     if (index != -1) {
-      state.playing = state.playList[index];
+      nowItem = state.playList[index];
+      commit(types.SETPLAYINGSONG, nowItem);
     } else {
-      state.playList.push(item);
-      state.playListIds.push(item.data.songid);
-      state.playing = state.playList[state.playList.length - 1];
+      commit(types.ADDPLAYLIST, item);
+      nowItem = state.playList[state.playList.length - 1];
+      commit(types.SETPLAYINGSONG, nowItem);
     }
     resolve();
   }).then(() => {
@@ -65,20 +70,18 @@ export const immediately = ({ commit, state }, item) => {
  * @param {*} index 
  */
 export const delFromPlayList = ({ commit, state }, index) => {
+  let nowItem = null;
   new Promise((resolve, reject) => {
     if (state.playing == state.playList[index]) {
       commit(types.TOPAUSE);
-      state.playing = state.playList[index + 1]
-                      ? state.playList[index + 1]
-                      : state.playList[index - 1]
-                      ? state.playList[index - 1]
-                      : null
+      nowItem = state.playList[index + 1]
+                ? state.playList[index + 1]
+                : state.playList[index - 1]
+                ? state.playList[index - 1]
+                : null
     }
-    state.playList.splice(index, 1);
-    state.playListIds.splice(index, 1);
-    if (state.playList.length <= 0) {
-      state.playing = null;
-    }
+    commit(types.DELPLAYLIST, index);
+    commit(types.SETPLAYINGSONG, nowItem);
     resolve();
   }).then(() => {
     if (state.playing) commit(types.TOPLAY);

@@ -13,10 +13,11 @@ class API {
     Object.keys(url).forEach(item => {
       newObj[item] = jsonp.bind(null, url[item]);
     })
-
     // 合并
     Object.assign(this, newObj);
-
+  }
+  getJsonp (url, params) {
+    return jsonp.call(this, url, params);
   }
 }
 
