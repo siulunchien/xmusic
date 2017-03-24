@@ -7,7 +7,7 @@
     <transition name="fade">
       <div v-show="chooseSong" class="choose__mask" @click="close"></div>
     </transition>
-    <transition name="slide-fade">
+    <transition name="slide">
       <div v-show="chooseSong" class="choose__main">
         <header class="choose__main__header">
           <h3 v-if="chooseSong" class="f-14"><span>歌曲：</span> {{ chooseSong.data.songname }}</h3>
