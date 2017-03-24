@@ -3,7 +3,7 @@
 </style>
 
 <template>
-  <div class="player">
+  <div class="player player--bgColor">
     <div class="player__bg" :style="bg"></div>
     <div class="player__mask"></div>
     <section class="player__content">

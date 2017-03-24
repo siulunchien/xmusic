@@ -7,7 +7,7 @@
     <transition name="fade">
       <div v-show="isShow" class="play-list__mask" @click="closePlayList"></div>
     </transition>
-    <transition name="slide-fade">
+    <transition name="slide">
       <div v-show="isShow" class="play-list-container">
         <header class="play-list-container__header">
           <h3 class="f-14">播放列表</h3>

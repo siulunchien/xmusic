@@ -20,7 +20,7 @@
     <!-- 播放列表 -->
     <play-list :isShow="isShowPlayList" v-on:closePlayList="closePlayList"></play-list>
     <!-- 播放器 -->
-    <transition name="slide-fade">
+    <transition name="slide">
       <Player v-show="isShowPlayer" :albummPic="albummPic" :duration="duration" :currentTime="currentTime" :progress="timeProgress" v-on:setProgress="setProgress" v-on:closePlayer="closePlayer" v-on:showPlayList="showPlayList"></Player>
     </transition>
     <Choose></Choose>
@@ -45,7 +45,7 @@
         timeProgress: '',
         timer: null,
         duration: 0,
-        currentTime: 0
+        currentTime: 0,
       }
     },
     mounted () {
@@ -86,6 +86,7 @@
         clearInterval(this.timer);
         audio.removeEventListener('ended', this.next, false);
         audio.addEventListener('ended', this.next, false);
+
         if (this.isPlaying) {
           audio.play();
           this.timer = setInterval(() => {

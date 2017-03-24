@@ -47,26 +47,10 @@ select{
   & .fade-enter, .fade-leave-active {
     opacity: 0
   }
-  & .slide-fade-enter-active {
+  & .slide-enter-active, & .slide-leave-active {
     transition: all .3s ease;
   }
-  & .slide-fade-leave-active {
-    transition: all .3s ease;
-  }
-  & .slide-fade-enter, .slide-fade-leave-active {
+  & .slide-enter, .slide-leave-active {
     transform: translateY(100%);
   }
-}
-
-.rippleBtn{
-    position: absolute;
-    background: rgba(0,0,0,0.3);
-    border-radius: 100%;
-    transform: scale(0);
-    transform-origin: center center;
-    transition: all .75s cubic-bezier(0.250, 0.460, 0.450, 0.940);
-}
-.rippleBtnBig{
-    transform: scale(1.5);
-    opacity: 0;
 }
