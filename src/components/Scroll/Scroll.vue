@@ -26,15 +26,15 @@
     activated () {
       this.$nextTick(() => {
         if (this.scrollEl) {
-          this.scrollEl.removeEventListener('scroll', this.scrollScord, false);
+          this.scrollEl.removeEventListener('scroll', this.scrollRecord, false);
           this.scrollEl.scrollTop = this.scrollY;
-          this.scrollEl.addEventListener('scroll', this.scrollScord, false);
+          this.scrollEl.addEventListener('scroll', this.scrollRecord, false);
         }
       })
     },
     methods: {
       // 记录滚动条位置
-      scrollScord () {
+      scrollRecord () {
         this.scrollY = this.scrollEl.scrollTop;
       }
     }
