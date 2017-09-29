@@ -36,7 +36,7 @@
     },
     watch: {
       '$route' () {
-        this.$store.commit(CLEARCHOOSESONG);
+        this.$store.commit(CLEARCHOOSESONG)
       }
     }
   }
