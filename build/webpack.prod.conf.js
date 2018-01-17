@@ -8,6 +8,7 @@ var CopyWebpackPlugin = require('copy-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
+var PreloadWebpackPlugin = require('preload-webpack-plugin')
 
 var env = config.build.env
 
@@ -51,13 +52,18 @@ var webpackConfig = merge(baseWebpackConfig, {
       inject: true,
       minify: {
         removeComments: true,
-        collapseWhitespace: true,
+        collapseWhitespace: false,
         removeAttributeQuotes: true
         // more options:
         // https://github.com/kangax/html-minifier#options-quick-reference
       },
       // necessary to consistently work with multiple chunks via CommonsChunkPlugin
       chunksSortMode: 'dependency'
+    }),
+    new PreloadWebpackPlugin({
+      rel: 'preload',
+      include: 'all',
+      as: 'script'
     }),
     // split vendor js into its own file
     new webpack.optimize.CommonsChunkPlugin({
