@@ -63,12 +63,12 @@ var webpackConfig = merge(baseWebpackConfig, {
     }),
     new PreloadWebpackPlugin({
       rel: 'preload',
-      include: 'all',
+      include: ['app', 'vendor', 'manifest'],
       as: 'script'
     }),
-    new ScriptExtHtmlWebpackPlugin({
-      defaultAttribute: 'defer'
-    }),
+    // new ScriptExtHtmlWebpackPlugin({
+    //   defaultAttribute: 'defer'
+    // }),
     // split vendor js into its own file
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
